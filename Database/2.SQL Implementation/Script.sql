@@ -46,8 +46,8 @@ CREATE TABLE Courses (
 );
 
 CREATE TABLE course_Prerequisites (
-    course_id number(5),
-    prerequisite_id number(5),
+    course_id number(5) not null ,
+    prerequisite_id number(5) not null ,
     PRIMARY KEY (course_id, prerequisite_id),
     CONSTRAINT fk_course_has_prerequisite FOREIGN KEY (course_id) REFERENCES Courses(course_id),
     CONSTRAINT fk_prerequisite FOREIGN KEY (prerequisite_id) REFERENCES Courses(course_id)
