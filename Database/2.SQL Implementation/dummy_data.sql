@@ -26,6 +26,18 @@ INSERT INTO Courses (course_id, course_name, credit_hours, minimum_level, depart
 VALUES (2, 'Object Oriented Programming', 3, 2, 'CS');
 INSERT INTO Courses (course_id, course_name, credit_hours, minimum_level, department_id) 
 VALUES (3, 'Functional Programming', 3, 3, 'CS');
+INSERT INTO Courses (course_id, course_name, credit_hours, minimum_level, department_id) 
+VALUES (4, 'Database Management Systems', 3, 1, 'IS');
+INSERT INTO Courses (course_id, course_name, credit_hours, minimum_level, department_id) 
+VALUES (5, 'Web Development', 3, 1, 'IS');
+INSERT INTO Courses (course_id, course_name, credit_hours, minimum_level, department_id) 
+VALUES (6, 'Data Visualization', 3, 1, 'DS');
+INSERT INTO Courses (course_id, course_name, credit_hours, minimum_level, department_id) 
+VALUES (7, 'Statistics', 3, 1, 'DS');
+INSERT INTO Courses (course_id, course_name, credit_hours, minimum_level, department_id) 
+VALUES (8, 'Human Resources', 2, 1, 'GN');
+INSERT INTO Courses (course_id, course_name, credit_hours, minimum_level, department_id) 
+VALUES (9, 'Project Management', 3, 1, 'GN');
 
 -- Insert data into course_Prerequisites
 
@@ -46,6 +58,22 @@ INSERT INTO Grades (Grade_letter, min_degree, max_degree, grade_gpa) VALUES ('F'
 
 -- Insert data into Enrollment
 
+-- Student 1
+
 INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (1, 1, 'F' , 2023);
-INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (2, 1, 'A' ,2023);
+INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (1, 4, 'A', 2023);
+INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (1, 5, 'B+', 2023);
+INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (1, 6, 'C+', 2023);
+INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (1, 7, 'D+', 2023);
+INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (1, 8, 'B', 2023);
+
+-- Student 2
+
 INSERT INTO Enrollment (Student_id, Course_id,  academic_year) VALUES (2, 2, 2024);
+INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (2, 1, 'A' ,2023);
+INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (2, 4, 'C', 2023);
+INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (2, 5, 'B', 2023);
+INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (2, 6, 'D', 2023);
+INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (2, 7, 'B+', 2023);
+INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (2, 8, 'A+', 2023);
+
