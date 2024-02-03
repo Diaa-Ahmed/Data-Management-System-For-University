@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="266.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Helper.AddDepartmentController">
+   <children>
+      <Label fx:id="titlelabel" alignment="CENTER" layoutX="137.0" layoutY="14.0" prefHeight="55.0" prefWidth="267.0" text="Add Department">
+         <font>
+            <Font name="Arial Bold" size="32.0" />
+         </font>
+      </Label>
+      <Separator layoutX="168.0" layoutY="67.0" prefHeight="16.0" prefWidth="200.0" />
+      <Separator layoutX="169.0" layoutY="60.0" prefHeight="16.0" prefWidth="200.0" />
+      <Label layoutX="57.0" layoutY="103.0" prefHeight="27.0" prefWidth="160.0" text="Department Name ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="dnametf" layoutX="32.0" layoutY="137.0" prefHeight="31.0" prefWidth="210.0" />
+      <Label layoutX="324.0" layoutY="105.0" prefHeight="27.0" prefWidth="122.0" text="Department ID">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="addbtn" layoutX="219.0" layoutY="190.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="104.0" text="Add" />
+      <TextField fx:id="did" layoutX="324.0" layoutY="139.0" prefHeight="31.0" prefWidth="122.0" />
+   </children>
+</AnchorPane>

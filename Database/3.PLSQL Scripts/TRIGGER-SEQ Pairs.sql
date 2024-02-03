@@ -14,7 +14,9 @@ ON ADMIN.COURSES
 REFERENCING NEW AS New OLD AS Old
 FOR EACH ROW
 BEGIN
+if :new.COURSE_ID is null then 
   :new.COURSE_ID := COURSES_SEQ.nextval;
+  end if;
 END COURSES_TRG;
  
 ------------------------------------------Student---------------------------------------------
@@ -33,5 +35,7 @@ ON ADMIN.STUDENTS
 REFERENCING NEW AS New OLD AS Old
 FOR EACH ROW
 BEGIN
+if  :new.STUDENT_ID  is null then 
   :new.STUDENT_ID := STUDENTS_SEQ.nextval;
+end if;
 END STUDENTS_TRG;

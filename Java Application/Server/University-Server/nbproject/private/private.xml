@@ -3,7 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-a-University/Java%20Application/Server/University-Server/src/Server/DAO/DataRetrieval.java</file>
+            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-University/Java%20Application/Server/University-Server/src/View/Helper/AddCourse.fxml</file>
+            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-University/Java%20Application/Server/University-Server/src/View/Helper/AddStudent.fxml</file>
+            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-University/Java%20Application/Server/University-Server/src/Server/DTO/Department.java</file>
+            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-University/Java%20Application/Server/University-Server/src/Controller/Helper/AddCourseController.java</file>
+            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-University/Java%20Application/Server/University-Server/src/View/Helper/AddDepartment.fxml</file>
+            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-University/Java%20Application/Server/University-Server/src/Controller/CourseViewController.java</file>
+            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-University/Java%20Application/Server/University-Server/src/Server/DTO/Student.java</file>
+            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-University/Java%20Application/Server/University-Server/src/Server/DAO/DataModification.java</file>
+            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-University/Java%20Application/Server/University-Server/src/Controller/Helper/AddStudentController.java</file>
+            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-University/Java%20Application/Server/University-Server/src/Controller/Helper/AddDepartmentController.java</file>
+            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-University/Java%20Application/Server/University-Server/src/Server/DAO/DataRetrieval.java</file>
+            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-University/Java%20Application/Server/University-Server/src/Controller/StudentViewController.java</file>
+            <file>file:/D:/ITI/University%20Case%20Study/Data-Management-System-for-University/Java%20Application/Server/University-Server/src/Controller/DepartmentViewController.java</file>
         </group>
     </open-files>
 </project-private>

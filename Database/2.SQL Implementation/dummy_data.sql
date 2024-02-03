@@ -77,3 +77,7 @@ INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALU
 INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (2, 7, 'B+', 2023);
 INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALUES (2, 8, 'A+', 2023);
 
+
+--truncate table Enrollment;
+INSERT INTO Enrollment (Student_id, Course_id,  academic_year) VALUES (1, 1, 2024);
+
