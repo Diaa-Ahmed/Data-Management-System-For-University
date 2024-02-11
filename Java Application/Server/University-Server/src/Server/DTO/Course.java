@@ -71,6 +71,9 @@ public class Course {
         this.department = department;
     }
 
-   
+   @Override
+    public String toString() {
+        return name + " - " + credit_hours+ " - " +department.getId() ;
+    }
     
 }

@@ -6,6 +6,7 @@
 package Controller;
 
 import Controller.Helper.AddStudentController;
+import Controller.Helper.EnrollmentController;
 import Server.DAO.DataModification;
 import Server.DAO.DataRetrieval;
 import Server.DTO.Student;
@@ -37,6 +38,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -102,24 +104,24 @@ public class StudentViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         addbtn.setOnAction(event -> {
-             try {
-                    Stage popup = new Stage();
-                    popup.initModality(Modality.APPLICATION_MODAL);
-                    Parent root = FXMLLoader.load(getClass().getResource("/View/Helper/AddStudent.fxml"));
-                    Scene scene = new Scene(root);
-                    popup.setResizable(false);
-                    popup.setScene(scene);
-                    popup.setOnCloseRequest(evt-> loadData());
-                    popup.show();
-             } catch (IOException ex) {
-                 Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
-             }
-         });
+            try {
+                Stage popup = new Stage();
+                popup.initModality(Modality.APPLICATION_MODAL);
+                Parent root = FXMLLoader.load(getClass().getResource("/View/Helper/AddStudent.fxml"));
+                Scene scene = new Scene(root);
+                popup.setResizable(false);
+                popup.setScene(scene);
+                popup.setOnCloseRequest(evt -> loadData());
+                popup.show();
+            } catch (IOException ex) {
+                Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         updatebtn.setOnAction(event -> {
-             try {
-                 if (!studentlist.getSelectionModel().isEmpty()) {
+            try {
+                if (!studentlist.getSelectionModel().isEmpty()) {
                     selected_student = studentlist.getSelectionModel().getSelectedItems().get(0);
                     Stage popup = new Stage();
                     popup.initModality(Modality.APPLICATION_MODAL);
@@ -130,24 +132,22 @@ public class StudentViewController implements Initializable {
                     Scene scene = new Scene(temp);
                     popup.setResizable(false);
                     popup.setScene(scene);
-                    popup.setOnCloseRequest(evt-> {
+                    popup.setOnCloseRequest(evt -> {
                         loadData();
                     });
                     popup.show();
-                 }
-                 else
-                 {
+                } else {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setContentText("Please Choose Student");
                     Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
                     stage.setTitle("Updating Student !!");
                     alert.showAndWait();
-                 }
-             } catch (IOException ex) {
-                 Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
-             }
-         });
-        
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
         deletebtn.setOnAction(event -> {
             if (!studentlist.getSelectionModel().isEmpty()) {
                 selected_student = studentlist.getSelectionModel().getSelectedItems().get(0);
@@ -158,14 +158,15 @@ public class StudentViewController implements Initializable {
                 alert.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
                         try {
-                            if(DataModification.deletion("student", selected_student))
+                            if (DataModification.deletion("student", selected_student)) {
                                 loadData();
+                            }
                         } catch (SQLException ex) {
                             Logger.getLogger(StudentViewController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 });
-                
+
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Please Choose Student");
@@ -205,26 +206,48 @@ public class StudentViewController implements Initializable {
         thourscol.setCellValueFactory(cellData
                 -> new SimpleIntegerProperty(cellData.getValue().getTotal_hours()).asObject());
 
-       phonecol.setCellValueFactory(cellData
+        phonecol.setCellValueFactory(cellData
                 -> new SimpleStringProperty(concatNumbers(cellData.getValue().getPhonenumbers())));
-        /*fnamecol.setEditable(true);
-        fnamecol.setCellFactory( tc -> {
-        EditingCell cell = new EditingCell();
-        cell.setConverter(new StringConverter<String>() {
-            @Override
-            public String toString(String object) {
-                return object;
-            }
 
+        studentlist.setRowFactory(new Callback<TableView<Student>, TableRow<Student>>() {
             @Override
-            public String fromString(String string) {
-                return string;
-            }
-         });
-            return cell;
-        });*/
+            public TableRow<Student> call(TableView<Student> st) {
+                TableRow<Student> row = new TableRow<>();
+                row.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        if (event.getClickCount() == 2 && (!row.isEmpty())) {
 
-        //  fnamecol.setOnEditCommit(event -> updateDatabase(event));
+                            try {
+                                Student clicked = row.getItem();
+                                Stage popup = new Stage();
+                                popup.initModality(Modality.APPLICATION_MODAL);
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Helper/Enrollment.fxml"));
+                                Parent temp = loader.load();
+                                EnrollmentController controller = loader.getController();
+
+                                controller.setClicked(clicked);
+                                Scene scene = new Scene(temp);
+                                popup.setResizable(false);
+                                popup.setScene(scene);
+                                popup.setOnCloseRequest(evt -> {
+                                    loadData();
+                                });
+                                popup.show();
+                            } catch (IOException ex) {
+                                Logger.getLogger(StudentViewController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                        }
+                    }
+
+                }
+                );
+
+                return row;
+            }
+        }
+        );
         loadData();
     }
 
@@ -233,56 +256,26 @@ public class StudentViewController implements Initializable {
             receivedlist = DataRetrieval.getStudents();
             studentObservableList = FXCollections.observableArrayList(receivedlist);
             studentlist.setItems(studentObservableList);
+
         } catch (SQLException ex) {
-            Logger.getLogger(StudentViewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentViewController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private String hidePassword(String pass){
-        String hidden ="";
-        for(int i = 0 ; i <pass.length() ; i++)
-            hidden+="*";
+
+    private String hidePassword(String pass) {
+        String hidden = "";
+        for (int i = 0; i < pass.length(); i++) {
+            hidden += "*";
+        }
         return hidden;
     }
-    private String concatNumbers(ArrayList<Integer> numbers){
+
+    private String concatNumbers(ArrayList<Integer> numbers) {
         String concat = "";
-        for(int num : numbers)
-            concat+= num +"\n";
+        for (int num : numbers) {
+            concat += num + "\n";
+        }
         return concat;
     }
-    /*public static class EditingCell extends javafx.scene.control.cell.TextFieldTableCell<Student, String> {
-
-    public EditingCell() {
-    }
-
-    @Override
-    public void updateItem(String item, boolean empty) {
-        super.updateItem(item, empty);
-
-        if (empty) {
-            setText(null);
-            setGraphic(null);
-        } else {
-            setText(getString());
-            setGraphic(null);
-        }
-    }
-
-    @Override
-    public void commitEdit(String newValue) {
-        
-        System.out.println("inside commit");
-        if (getTableRow() != null && getTableRow().getItem() != null) {
-            Student curr = (Student) getTableRow().getItem();
-            System.out.println("name befor edit -- " + curr.getFname() );
-         //   curr.setFname(newValue);
-            super.commitEdit("");
-         System.out.println("name after edit -- " + curr.getFname() );
-        }
-    }
-
-    private String getString() {
-        return getItem() == null ? "" : getItem();
-    }
-}
-     */
 }

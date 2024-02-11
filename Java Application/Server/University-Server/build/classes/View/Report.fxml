@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportController">
+   <children>
+      <TableView fx:id="courselist" layoutX="3.0" layoutY="3.0" prefHeight="208.0" prefWidth="400.0">
+         <columns>
+            <TableColumn fx:id="cnamecol" prefWidth="261.0" text="Course Name" />
+            <TableColumn fx:id="dnamecol" minWidth="0.0" prefWidth="137.0" text="Department" />
+         </columns>
+      </TableView>
+      <AnchorPane layoutX="462.0" layoutY="23.0" prefHeight="172.0" prefWidth="357.0">
+         <children>
+            <Label layoutX="22.0" layoutY="29.0" prefHeight="39.0" prefWidth="188.0" text="Total Students : ">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="104.0" prefHeight="39.0" prefWidth="177.0" text="Average GPA : ">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalstud" alignment="CENTER" layoutX="210.0" layoutY="26.0" prefHeight="46.0" prefWidth="97.0" text="520" textFill="#a89191">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="avggpa" alignment="CENTER" layoutX="210.0" layoutY="100.0" prefHeight="46.0" prefWidth="97.0" text="3.4" textFill="#a89191">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <PieChart layoutX="40.0" layoutY="241.0" prefHeight="306.0" prefWidth="328.0" />
+      <BarChart layoutX="400.0" layoutY="194.0" prefHeight="405.0" prefWidth="499.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</AnchorPane>

@@ -59,7 +59,7 @@ public class HomeController implements Initializable {
             studentstab.setContent(FXMLLoader.load(getClass().getResource("/View/StudentView.fxml")));
             departmentstab.setContent(FXMLLoader.load(getClass().getResource("/View/DepartmentView.fxml")));
             coursestab.setContent(FXMLLoader.load(getClass().getResource("/View/CourseView.fxml")));
-            reportstab.setContent(FXMLLoader.load(getClass().getResource("/View/ReportView.fxml")));
+            reportstab.setContent(FXMLLoader.load(getClass().getResource("/View/Report.fxml")));
             
             configureTab(studentstab, "Students", "/resources/student.png");
             studentstab.setStyle("-fx-background-color:  derive(#00BCD4,-20%);");

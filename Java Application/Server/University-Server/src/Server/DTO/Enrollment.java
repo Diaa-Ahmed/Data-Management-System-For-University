@@ -15,16 +15,16 @@ public class Enrollment {
     private Student student ;
     private Course course;
     private String grade;
-    private Date year ;
+    private String year ;
 
-    public Enrollment(Student student, Course course, String grade, Date year) {
+    public Enrollment(Student student, Course course, String grade, String year) {
         this.student = student;
         this.course = course;
         this.grade = grade;
         this.year = year;
     }
 
-    public Enrollment(Student student, Course course, Date year) {
+    public Enrollment(Student student, Course course, String year) {
         this.student = student;
         this.course = course;
         this.year = year;
@@ -54,11 +54,11 @@ public class Enrollment {
         this.grade = grade;
     }
 
-    public Date getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Date year) {
+    public void setYear(String year) {
         this.year = year;
     }
     

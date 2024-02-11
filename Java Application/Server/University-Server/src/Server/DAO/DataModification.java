@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -98,6 +99,48 @@ public class DataModification {
         }
     }
 
+    public static boolean modifyEnrollment(Enrollment enrollment, boolean update) throws SQLException {
+        Connection con = DBConnection.getConnection();
+        PreparedStatement statement;
+        if (update) {
+            statement = con.prepareCall("update enrollment set grade_letter = ? where student_id = ? and course_id = ? and academic_year = ?");
+            statement.setString(1, enrollment.getGrade());
+            statement.setInt(2, enrollment.getStudent().getStudent_id());
+            statement.setInt(3, enrollment.getCourse().getId());
+        } else {
+            statement = con.prepareCall("INSERT INTO enrollment VALUES (?,?,?,?)");
+            statement.setInt(1, enrollment.getStudent().getStudent_id());
+            statement.setInt(2, enrollment.getCourse().getId());
+            statement.setString(3, enrollment.getGrade());
+        }
+        statement.setString(4, enrollment.getYear());
+        int out = statement.executeUpdate();
+        statement.close();
+        if (out == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean addPrerequisite(Course course, ArrayList<Prerequisite> prerequisites) throws SQLException {
+        Connection con = DBConnection.getConnection();
+        ResultSet result;
+        PreparedStatement statement;
+        statement = con.prepareCall("INSERT INTO COURSE_PREREQUISITES VALUES(?,?)");
+        for (Prerequisite p : prerequisites) {
+            if(p.getStatus())
+            {
+            statement.setInt(1, course.getId());
+            statement.setInt(2, p.getCourse().getId());
+            int out = statement.executeUpdate();
+        
+            }
+        }
+        statement.close();
+        return true;
+    }
+
     public static boolean deletion(String type, Object data) throws SQLException {
         Connection con = DBConnection.getConnection();
         PreparedStatement statement;
@@ -115,9 +158,20 @@ public class DataModification {
                 break;
             case "department":
                 Department department = (Department) data;
-                System.out.println(department.getId());
                 statement = con.prepareCall("delete from departments where department_id = ? ");
                 statement.setString(1, department.getId());
+                break;
+            case "enrollment":
+                Enrollment enrollment = (Enrollment) data;
+                statement = con.prepareCall("delete from Enrollment where student_id = ? and course_id = ? and academic_year = ?");
+                statement.setInt(1, enrollment.getStudent().getStudent_id());
+                statement.setInt(2, enrollment.getCourse().getId());
+                statement.setString(3, enrollment.getYear());
+                break;
+            case "prerequisite":
+                Course prerequisite = (Course) data;
+                statement = con.prepareCall("delete from COURSE_PREREQUISITES where course_id = ?");
+                statement.setInt(1, prerequisite.getId());
                 break;
             default:
                 return false;

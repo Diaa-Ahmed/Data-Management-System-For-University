@@ -6,10 +6,12 @@
 package Controller;
 
 import Controller.Helper.AddCourseController;
+import Controller.Helper.PrerequisiteController;
 import Server.DAO.DataModification;
 import Server.DAO.DataRetrieval;
 import Server.DTO.Course;
 import Server.DTO.Department;
+import Server.DTO.Student;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -21,6 +23,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,9 +34,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -155,6 +161,41 @@ public class CourseViewController implements Initializable {
         dnamecol.setCellValueFactory(cellData
                 -> new SimpleStringProperty(cellData.getValue().getDepartment().getId()));
         loadData();
+        
+        courselist.setRowFactory(new Callback<TableView<Course>, TableRow<Course>>() {
+        @Override
+        public TableRow<Course> call(TableView<Course> st) {
+            TableRow<Course> row = new TableRow<>();
+            row.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                        try {
+                            selected_Course = courselist.getSelectionModel().getSelectedItems().get(0);
+                            Stage popup = new Stage();
+                            popup.initModality(Modality.APPLICATION_MODAL);
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Helper/Prerequisite.fxml"));
+                            Parent temp = loader.load();
+                            PrerequisiteController ctrl = loader.getController();
+                            ctrl.setClicked(selected_Course);
+                            Scene scene = new Scene(temp);
+                            popup.setResizable(false);
+                            popup.setScene(scene);
+                            popup.setOnCloseRequest(evt-> {
+                                loadData();
+                            });
+                            popup.show();
+                        } catch (IOException ex) {
+                            Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        }
+                }
+            });
+            return row;
+        }
+    });
+
+
     }    
      private void loadData(){
         try {
