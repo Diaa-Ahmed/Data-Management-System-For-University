@@ -80,7 +80,6 @@ INSERT INTO Enrollment (Student_id, Course_id, grade_letter, academic_year) VALU
 INSERT INTO Enrollment (Student_id, Course_id,  academic_year) VALUES (1, 1, '2024');
 
 
-truncate table enrollment;
 
 
 
