@@ -5,6 +5,10 @@
  */
 package Main;
 
+import Controller.CourseViewController;
+import Controller.DepartmentViewController;
+import Controller.ReportController;
+import Controller.StudentViewController;
 import Server.DAO.DataRetrieval;
 import Server.DTO.Student;
 import java.io.IOException;
@@ -28,6 +32,8 @@ import javafx.scene.text.TextAlignment;
 import com.jfoenix.controls.JFXTabPane;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 
 /**
  * FXML Controller class
@@ -49,6 +55,10 @@ public class HomeController implements Initializable {
     @FXML
     private JFXTabPane container;
     EventHandler<Event> tabFocusHandler;
+    private static ReportController rc ;
+    private static DepartmentViewController dc ;
+    private static StudentViewController sc ;
+    private static CourseViewController cc ;
 
     /**
      * Initializes the controller class.
@@ -59,36 +69,35 @@ public class HomeController implements Initializable {
             studentstab.setContent(FXMLLoader.load(getClass().getResource("/View/StudentView.fxml")));
             departmentstab.setContent(FXMLLoader.load(getClass().getResource("/View/DepartmentView.fxml")));
             coursestab.setContent(FXMLLoader.load(getClass().getResource("/View/CourseView.fxml")));
-            reportstab.setContent(FXMLLoader.load(getClass().getResource("/View/Report.fxml")));
-            
+            reportstab.setContent(FXMLLoader.load(getClass().getResource("/View/ReportView.fxml")));
             configureTab(studentstab, "Students", "/resources/student.png");
             studentstab.setStyle("-fx-background-color:  derive(#00BCD4,-20%);");
             configureTab(departmentstab, "Departments", "/resources/department.png");
             configureTab(coursestab, "Courses", "/resources/course.png");
             configureTab(reportstab, "Reports", "/resources/report.png");
-            
-            /*button.addEventHandler(ActionEvent.ACTION, (ActionEvent event) -> {
-                Student student = new Student("mego@gmail.com", "123");
-                try {
-                    DataRetrieval.login(student);
-                } catch (SQLException ex) {
-                    System.out.println("Can't Connect");
-                    Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });*/
+
         } catch (IOException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     private void configureTab(Tab tab, String title, String iconPath) {
         double imageWidth = 60.0;
-        tab.setOnSelectionChanged((event) -> { 
-            Tab currentTab = (Tab) event.getTarget();
-            if (currentTab.isSelected()) {
-                currentTab.setStyle("-fx-background-color:  derive(#00BCD4,-20%);");
-            } else {
-                currentTab.setStyle("-fx-background-color: #00BCD4;");
-            }    
+        tab.setOnSelectionChanged((event) -> {
+            try {
+                Tab currentTab = (Tab) event.getTarget();
+                if (currentTab.isSelected()) {
+                    currentTab.setStyle("-fx-background-color:  derive(#00BCD4,-20%);");
+                } else {
+                    currentTab.setStyle("-fx-background-color: #00BCD4;");
+                }
+                rc.loadData();
+                dc.loadData() ;
+                sc.loadData();
+                cc.loadData();
+            } catch (SQLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         ImageView imageView = new ImageView(new Image(iconPath));
         imageView.setFitHeight(imageWidth);
@@ -101,7 +110,7 @@ public class HomeController implements Initializable {
         label.setTextAlignment(TextAlignment.CENTER);
 
         BorderPane tabPane = new BorderPane();
-       // tabPane.setRotate(90.0);
+        // tabPane.setRotate(90.0);
         tabPane.setMaxWidth(222);
         tabPane.setCenter(imageView);
         tabPane.setBottom(label);
@@ -109,4 +118,21 @@ public class HomeController implements Initializable {
         tab.setText("");
         tab.setGraphic(tabPane);
     }
+
+    public static void setRc(ReportController rc) {
+        HomeController.rc = rc;
+    }
+
+    public static void setDc(DepartmentViewController dc) {
+        HomeController.dc = dc;
+    }
+
+    public static void setSc(StudentViewController sc) {
+        HomeController.sc = sc;
+    }
+
+    public static void setCc(CourseViewController cc) {
+        HomeController.cc = cc;
+    }
+    
 }

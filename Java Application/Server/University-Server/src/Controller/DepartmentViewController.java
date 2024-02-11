@@ -6,6 +6,7 @@
 package Controller;
 
 import Controller.Helper.AddDepartmentController;
+import Main.HomeController;
 import Server.DAO.DataModification;
 import Server.DAO.DataRetrieval;
 import Server.DTO.Department;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -62,6 +64,8 @@ public class DepartmentViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Platform.runLater(() -> {
+        HomeController.setDc(this);
           addbtn.setOnAction(event -> {
              try {
                     Stage popup = new Stage();
@@ -139,8 +143,9 @@ public class DepartmentViewController implements Initializable {
         dnamecol.setCellValueFactory(cellData
                 -> new SimpleStringProperty(cellData.getValue().getName()));
         loadData();
+        });
     }    
-    private void loadData(){
+    public void loadData(){
         try {
             receivedlist = DataRetrieval.getDepartments();
             DepartmentObservableList = FXCollections.observableArrayList(receivedlist);

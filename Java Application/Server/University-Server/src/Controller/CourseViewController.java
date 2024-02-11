@@ -7,6 +7,7 @@ package Controller;
 
 import Controller.Helper.AddCourseController;
 import Controller.Helper.PrerequisiteController;
+import Main.HomeController;
 import Server.DAO.DataModification;
 import Server.DAO.DataRetrieval;
 import Server.DTO.Course;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -74,8 +76,8 @@ public class CourseViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        
+        Platform.runLater(() -> {
+        HomeController.setCc(this);
          addbtn.setOnAction(event -> {
              try {
                     Stage popup = new Stage();
@@ -195,9 +197,9 @@ public class CourseViewController implements Initializable {
         }
     });
 
-
+        });
     }    
-     private void loadData(){
+     public void loadData(){
         try {
             receivedlist = DataRetrieval.getCourses();
             CourseObservableList = FXCollections.observableArrayList(receivedlist);

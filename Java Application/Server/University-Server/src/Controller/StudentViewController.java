@@ -7,6 +7,7 @@ package Controller;
 
 import Controller.Helper.AddStudentController;
 import Controller.Helper.EnrollmentController;
+import Main.HomeController;
 import Server.DAO.DataModification;
 import Server.DAO.DataRetrieval;
 import Server.DTO.Student;
@@ -104,9 +105,11 @@ public class StudentViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        Platform.runLater(() -> {
+        HomeController.setSc(this);
         addbtn.setOnAction(event -> {
             try {
+                
                 Stage popup = new Stage();
                 popup.initModality(Modality.APPLICATION_MODAL);
                 Parent root = FXMLLoader.load(getClass().getResource("/View/Helper/AddStudent.fxml"));
@@ -249,9 +252,10 @@ public class StudentViewController implements Initializable {
         }
         );
         loadData();
+        });
     }
 
-    private void loadData() {
+    public void loadData() {
         try {
             receivedlist = DataRetrieval.getStudents();
             studentObservableList = FXCollections.observableArrayList(receivedlist);
