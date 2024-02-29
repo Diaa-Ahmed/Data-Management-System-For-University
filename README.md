@@ -2,6 +2,7 @@
 
 We're to represent a user-friendly system to manage university data using SQL, PLSQL, Java, and Bash scripting. Our project involves designing a database, adding functionality with PLSQL, automating tasks with Bash scripts, and building a Java application for data management
 
+---
 # 1- Database Design
 
 We will start with ER diagram to demonstrate how entities connected to each other
@@ -37,6 +38,7 @@ Handle the composite attribute "Address" and multivalued attribute "Phone"
 
 ### 3NF : Tables are already in 3NF. ( No transitive dependencies )
 
+---
 # 2- SQL **Implementation**
 
 In this section, we will outline the implementation of SQL scripts for creating the database and discuss important points regarding each entity
@@ -56,14 +58,15 @@ In this section, we will outline the implementation of SQL scripts for creating 
 5. **Enrollment and Students/Courses/Grades**:
     - The **`Enrollment`** table has foreign key columns **`Student_id`**, **`Course_id`**, and **`Grade_letter`** referencing the **`student_id`**, **`course_id`**, and **`Grade_letter`** respectively in the **`Students`**, **`Courses`**, and **`Grades`** tables. This relationship links students to their enrolled courses and corresponding grades.
 
+---
+
 # 3- **PLSQL Implementation**
 
 In this section, we will provide a detailed overview of the PL/SQL scripts in our system. These scripts are integral components of our database management system, facilitating various operations such as data manipulation, calculation of GPA, and other essential functionalities.
 
-<aside>
-💡 **Triggers**
 
-</aside>
+## 💡 Triggers
+
 
 - **CUMULATIVE_GPA**
     
@@ -101,19 +104,14 @@ This trigger ensures that the student's level is updated automatically based on 
 
 This trigger ensures that each new enrollment record has an academic year assigned to it. If the academic year is not specified in the new enrollment record, the trigger automatically sets it to the current year (2024)
 
-<aside>
-💡 Function
-
-</aside>
+## 💡 Functions
 
 - **AVERAGE_GPA_COURSE**
 
 This function calculates the average GPA of students who are enrolled in a specific course.
 
-<aside>
-💡 Procedure
+## 💡 Procedure
 
-</aside>
 
 - **GET_AVAILABLE_COURSES**
 
@@ -124,6 +122,7 @@ This procedure finds out which courses a student can take based on their current
 - Then, it figures out which courses are available for the student to take next, based on their level and what they've done before.
 - Finally, it gives back a list of these available courses for the student to choose from.
 
+---
 # 4- **Automation Scripts**
 
 In this section, we'll discuss our Bash script designed to automate various tasks within our systems.
@@ -138,6 +137,8 @@ This Bash script automates database schema backups. It sets up parameters, creat
 
 1. **Disk Space:** It checks how much space is left on the computer's disk. If it's getting too full (above 82% full), it sends a warning message and shows a pop-up alert.
 2. **CPU Usage:** It also looks at how busy the computer's CPU is. If it's working too hard (above 50% usage), it sends another warning message and shows another pop-up alert.
+
+---
 
 # 5- **Java Application Development**
 
@@ -156,7 +157,7 @@ This Bash script automates database schema backups. It sets up parameters, creat
 - **View Controllers:** Corresponding controllers for each view manage their behavior.
 - **Model (DTO):** Data Transfer Objects (DTOs) in the "DTO" package facilitate data transfer between the DAO and views.
 
----
+
 
 ---
 
