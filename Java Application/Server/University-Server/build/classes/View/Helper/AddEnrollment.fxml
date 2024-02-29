@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="376.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Helper.AddEnrollmentController">
+   <children>
+      <Label fx:id="titlelabel" alignment="CENTER" layoutX="126.0" layoutY="14.0" prefHeight="55.0" prefWidth="267.0" text="Add Enrollment">
+         <font>
+            <Font name="Arial Bold" size="32.0" />
+         </font>
+      </Label>
+      <Separator layoutX="160.0" layoutY="67.0" prefHeight="16.0" prefWidth="200.0" />
+      <Separator layoutX="159.0" layoutY="60.0" prefHeight="16.0" prefWidth="200.0" />
+      <Label layoutX="100.0" layoutY="108.0" prefHeight="27.0" prefWidth="119.0" text="Course Name ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="yeattf" layoutX="200.0" layoutY="221.0" prefHeight="31.0" prefWidth="119.0" />
+      <ChoiceBox fx:id="gradecb" layoutX="285.0" layoutY="142.0" prefWidth="150.0" />
+      <Label layoutX="242.0" layoutY="188.0" prefHeight="27.0" prefWidth="37.0" text="Year">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="307.0" layoutY="108.0" prefHeight="27.0" prefWidth="104.0" text="Grade">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="coursescb" layoutX="65.0" layoutY="142.0" prefHeight="31.0" prefWidth="169.0" />
+      <Button fx:id="addbtn" layoutX="209.0" layoutY="285.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="104.0" text="Add" />
+   </children>
+</AnchorPane>
